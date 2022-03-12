@@ -1,5 +1,5 @@
 #include "mygraphicsview.h"
-
+#include <iostream>
 MyGraphicsView::MyGraphicsView(QWidget *parent)
     :QGraphicsView(parent)
 {
@@ -18,15 +18,38 @@ MyGraphicsView::MyGraphicsView(QWidget *parent)
     scene = new QGraphicsScene();   // Инициализируем сцену для отрисовки
     this->setScene(scene);          // Устанавливаем сцену в виджет
 
-    drawBoard(scene, size, padding);
+
+    Chessboard *myBoard = new Chessboard;
+    myBoard->setInintPosition();
+    drawBoard(scene, size, padding, myBoard);
+   // char path[] = "/home/yakov/Chess001/images/king_w.png";
+   // QPixmap imageKing(path);
+    //QGraphicsPixmapItem *pm = scene->addPixmap(imageKing);
+
+    //int a=7, b=5;
+
+    //if(myBoard->getPieceFromField(0) != nullptr) a=3;
+    //pm->setPos(size*a + padding,size*b + padding);
 }
 
-void MyGraphicsView::drawBoard(QGraphicsScene* boardScene, int size, int padding){
+void MyGraphicsView::drawBoard(QGraphicsScene* boardScene, int size, int padding, Chessboard* board){
 
-    boardScene->setSceneRect(0,0, size*8 + padding*2, size*8 + padding*2);
+    boardScene->setSceneRect(0, 0, size*8 + padding*2, size*8 + padding*2);
     for(int i=0; i<8; ++i)
         for(int j=0; j<8; ++j){
-            drawField(size, size*i + padding, size*j + padding, (i+j)%2, boardScene);
+            drawField(size, size*i + padding, size*j + padding, board->getFieldColor(i+j*8), boardScene);
+        }
+
+    for(int i=0; i<8; ++i)
+        for(int j=0; j<8; ++j){
+            Piece* tempPiece = board->getPieceFromField(i*8 + j);
+            if(tempPiece != nullptr){
+                std::cout << "\n --- " << tempPiece->getImagePath() << "---\n";
+                QString path = QString::fromStdString(tempPiece->getImagePath());
+                QPixmap pieceImage(path);
+                QGraphicsPixmapItem *pm = scene->addPixmap(pieceImage);
+                pm->setPos(size*(j) + padding, size*(7-i) + padding);
+            }
         }
 }
 

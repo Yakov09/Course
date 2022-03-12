@@ -6,13 +6,13 @@ class Chessfield
 {
     int number;
     bool empty;
-    int color;  // 0 - white, 1 - black, more for other design
+    bool color;  // 0 - white, 1 - black
 public:
     Chessfield(int num, bool em, int col);
     bool isEmpty();
     void setEmpty(bool status);
-    int getColor();
-    void setColor(int color);
+    bool getColor();
+    void setColor(bool newColor);
     int getNumber();
     void setNumber(int num);
 };
