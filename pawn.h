@@ -6,8 +6,8 @@
 class Pawn : public Piece
 {
 public:
-    Pawn();
-    bool isMovePossiable(Chessfield *destPosition, bool takes);
+    Pawn();    
+    bool* possiableMoves(Chessboard* board);
 };
 
 #endif // PAWN_H

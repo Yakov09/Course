@@ -8,7 +8,7 @@ class Chessfield
     bool empty;
     int color;  // 0 - white, 1 - black, more for other design
 public:
-    Chessfield();
+    Chessfield(int num, bool em, int col);
     bool isEmpty();
     void setEmpty(bool status);
     int getColor();

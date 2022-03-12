@@ -4,3 +4,7 @@ Pawn::Pawn()
 {
 
 }
+
+bool* Pawn::possiableMoves(Chessboard *board){
+
+}

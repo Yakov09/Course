@@ -6,8 +6,11 @@
 class Chessboard
 {
     Chessfield *field[64];
-    bool moveOrder; // 0 - white, 1 - black
-    Chessfield *possiableMoves[][2]; // field[from,to]
+    bool moveOrder; // 0 - white, 1 - black    
+    bool BlackCK = true;
+    bool BlackCQ = true;
+    bool WhiteCK = true;
+    bool WhiteCQ = true;
 public:
     Chessboard();
     int makeMove(Chessfield fieldNow, Chessfield fieldDest);  // 0 - Ok, 1 - no figure to move, 2 - incorrect move, 3 - other failes

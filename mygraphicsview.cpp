@@ -9,31 +9,32 @@ MyGraphicsView::MyGraphicsView(QWidget *parent)
     this->setAlignment(Qt::AlignCenter);                        // Делаем привязку содержимого к центру
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);    // Растягиваем содержимое по виджету
 
-    /* Также зададим минимальные размеры виджета
-     * */
-    this->setMinimumHeight(100);
-    this->setMinimumWidth(100);
+    /* Также зададим минимальные размеры виджета */
+    int size = 50;
+    int padding = 20;
+    this->setMinimumHeight(size*8 + padding*2);
+    this->setMinimumWidth(size*8 + padding*2);
 
     scene = new QGraphicsScene();   // Инициализируем сцену для отрисовки
     this->setScene(scene);          // Устанавливаем сцену в виджет
 
-    group_1 = new QGraphicsItemGroup();
-
-    int width = this->width();      // определяем ширину нашего виджета
-    int height = this->height();    // определяем высоту нашего виджета
-
-    /* Устанавливаем размер сцены по размеру виджета
-     * Первая координата - это левый верхний угол,
-     * а Вторая - это правый нижний угол
-     * */
-    scene->setSceneRect(0,0,width,height);
-    QPen penBlack(Qt::black); // Задаём чёрную кисть
-    /* Нарисуем черный прямоугольник
-     * */
-    group_1->addToGroup(scene->addLine(20,20, width - 20, 20, penBlack));
-    group_1->addToGroup(scene->addLine(width - 20, 20, width - 20, height -20, penBlack));
-    group_1->addToGroup(scene->addLine(width - 20, height -20, 20, height -20, penBlack));
-    group_1->addToGroup(scene->addLine(20, height -20, 20, 20, penBlack));
-
-    scene->addItem(group_1);
+    drawBoard(scene, size, padding);
 }
+
+void MyGraphicsView::drawBoard(QGraphicsScene* boardScene, int size, int padding){
+
+    boardScene->setSceneRect(0,0, size*8 + padding*2, size*8 + padding*2);
+    for(int i=0; i<8; ++i)
+        for(int j=0; j<8; ++j){
+            drawField(size, size*i + padding, size*j + padding, (i+j)%2, boardScene);
+        }
+}
+
+void MyGraphicsView::drawField(int size, int left, int top, int color, QGraphicsScene* boardScene){
+    QPen penBlack(Qt::black);
+    QBrush brush(color == 0 ? Qt::white : Qt::gray);
+    QRect fieldRect(left, top, size, size);
+    boardScene->addRect(fieldRect, penBlack, brush);
+}
+
+
