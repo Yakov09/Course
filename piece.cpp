@@ -124,3 +124,13 @@ void Piece::getPosMoves(int *posM){
 bool Piece::getColor(){
     return color;
 }
+
+int Piece::checkPossibleMove(int field){
+    if((field < 0)||(field > 63)) return 0;
+    return posMoves[field];
+}
+
+void Piece::setMyField(Chessfield* field){
+    if((field->getNumber() < 0)||(field->getNumber() > 63)) return;
+    myField = field;
+}

@@ -12,5 +12,4 @@ Rook::Rook(Chessfield *myF, bool myC)
 void Rook::possiableMoves(Chessboard *board){
     setPosMovesFalse();
     hvCheck(board);
-    return;
 }

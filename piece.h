@@ -21,9 +21,11 @@ protected:
 public:
     Piece();    
     virtual void possiableMoves(Chessboard* board) = 0;   // 0 - no move, 1 - can move, 2 - can take
+    int checkPossibleMove(int field);
     void getPosMoves(int posM[64]);
     void setPosMovesFalse();
     Chessfield* getMyField();
+    void setMyField(Chessfield* field);
     std::string getImagePath();
     void printPosMoves();
     bool getColor();

@@ -4,7 +4,6 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsItemGroup>
-//#include <QGraphicsSceneMouseEvent>
 #include <QMouseEvent>
 #include "chessboard.h"
 
@@ -16,10 +15,9 @@ public:
 private:
     Chessboard *myBoard = nullptr;
     QGraphicsScene *scene = nullptr;
-    int size = 50;
-    int padding = 20;
+    const int size = 50;
+    const int padding = 20;
 
-//    void drawField(int size, int left, int top, int color);
     void drawField(int fieldNum, QBrush color);
     void drawPiece(int fieldNum);
     void drawBoard();

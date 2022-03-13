@@ -13,5 +13,4 @@ void Queen::possiableMoves(Chessboard *board){
     setPosMovesFalse();
     hvCheck(board);
     diaCheck(board);
-    return;
 }

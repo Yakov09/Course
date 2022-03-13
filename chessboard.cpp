@@ -14,7 +14,7 @@ bool Chessboard::getFieldColor(int fieldNum){
 
 int Chessboard::setPiece(Piece **pieceSlot, Piece *piecePlaced, Chessfield fieldPlaced){
     if(fieldPlaced.isEmpty() != true) return 1;
-    *pieceSlot = piecePlaced;// = nullptr;
+    *pieceSlot = piecePlaced;
     fieldPlaced.setEmpty(false);
     return 0;
 }
@@ -30,17 +30,17 @@ void Chessboard::setInintPosition(){
     ;
     placedPieces[0] = new Rook(field[0], 0);
     placedPieces[1] = new Knight(field[1], 0);
-    placedPieces[2] = new Bishop(field[27], 0);
+    placedPieces[2] = new Bishop(field[2], 0);
     placedPieces[3] = new Queen(field[3], 0);
     placedPieces[4] = new King(field[4], 0);
     placedPieces[5] = new Bishop(field[5], 0);
     placedPieces[6] = new Knight(field[6], 0);
     placedPieces[7] = new Rook(field[7], 0);
-    //for(int i = 8;i<16;++i) placedPieces[i] = new Pawn(field[i], 0);
-    //for(int i = 16;i<24;++i) placedPieces[i] = new Pawn(field[i+32], 1);
+    for(int i = 8;i<16;++i) placedPieces[i] = new Pawn(field[i], 0);
+    for(int i = 16;i<24;++i) placedPieces[i] = new Pawn(field[i+32], 1);
     placedPieces[24] = new Rook(field[56], 1);
     placedPieces[25] = new Knight(field[57], 1);
-    placedPieces[26] = new Bishop(field[35], 1);
+    placedPieces[26] = new Bishop(field[58], 1);
     placedPieces[27] = new Queen(field[59], 1);
     placedPieces[28] = new King(field[60], 1);
     placedPieces[29] = new Bishop(field[61], 1);
@@ -52,10 +52,38 @@ void Chessboard::deletePiece(int slot){
     if(placedPieces[slot] != nullptr) placedPieces[slot]->~Piece();
     placedPieces[slot] = nullptr;
 }
+void Chessboard::deletePiece(Piece *delPiece){
+    int slot = MAX_PIECES;
+    for(int i=0; i<MAX_PIECES; ++i) if(placedPieces[i] == delPiece) slot = i;
+    if(slot == MAX_PIECES) return;
+    delPiece->~Piece();
+    placedPieces[slot] = nullptr;
+}
+
 Piece* Chessboard::getPieceFromField(int aimField){
     for(int i=0; i<MAX_PIECES; ++i){
         if(placedPieces[i] == nullptr) continue;
         if(placedPieces[i]->getMyField() == field[aimField]) return placedPieces[i];
     }
     return nullptr;
+}
+bool Chessboard::isChosenPiece(){ return PieceChosen;}
+
+void Chessboard::setChosenPiece(bool status, Piece* actPiece = nullptr){
+    activePiece = actPiece;
+    if(!status) activePiece = nullptr;
+    PieceChosen = status;
+}
+
+Piece* Chessboard::getChosenPiece(){
+    return activePiece;
+}
+
+void Chessboard::setMoveOrder(bool order){moveOrder = order;}
+
+bool Chessboard::getMoveOrder(){return moveOrder;}
+
+Chessfield* Chessboard::getField(int fieldNum){
+    if((fieldNum < 0)||(fieldNum > 63)) return nullptr;
+    return field[fieldNum];
 }

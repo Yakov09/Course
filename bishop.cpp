@@ -12,6 +12,4 @@ Bishop::Bishop(Chessfield *myF, bool myC)
 void Bishop::possiableMoves(Chessboard *board){
     setPosMovesFalse();
     diaCheck(board);
-    //printPosMoves();
-    return;
 }

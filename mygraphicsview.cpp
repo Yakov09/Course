@@ -18,8 +18,7 @@ MyGraphicsView::MyGraphicsView(QWidget *parent)
     this->setScene(scene);          // Устанавливаем сцену в виджет
 
     myBoard = new Chessboard;
-//    QGraphicsPixmapItem *pm[64];
-//    for(int i=0; i<64; ++i) pm[i] = nullptr;
+
     myBoard->setInintPosition();
     drawBoard();
 }
@@ -72,30 +71,41 @@ void MyGraphicsView::mouseReleaseEvent(QMouseEvent *mouseEvent){
     int field_v = 7 - ((point.ry() - padding) / size);
     int field = field_h + field_v*8;
     std::cout << "\n -- Released field " << field << " --- ";
-    if(myBoard->getPieceFromField(field) == nullptr) return;
-    drawBoard();
-    drawField(field, Qt::yellow);
-    drawPiece(field);
-    int posMoves[64];
-    myBoard->getPieceFromField(field)->possiableMoves(myBoard);
-    myBoard->getPieceFromField(field)->getPosMoves(posMoves);
+    Piece* activePiece = myBoard->getPieceFromField(field);
 
-    for(int i=0; i<64; ++i){
-        if(posMoves[i] == 1){
-            drawField(i, Qt::blue);
-            drawPiece(i);
+
+    if((myBoard->getChosenPiece() != nullptr)&&(myBoard->getChosenPiece()->checkPossibleMove(field)) == 0) {
+        myBoard->setChosenPiece(false, nullptr);
+        drawBoard();
+        return;
+    }
+    if(myBoard->getChosenPiece() == nullptr){
+        myBoard->setChosenPiece(true, activePiece);
+        drawBoard();
+        drawField(field, Qt::yellow);
+        drawPiece(field);
+        int posMoves[64];
+        activePiece->possiableMoves(myBoard);
+        activePiece->getPosMoves(posMoves);
+
+        for(int i=0; i<64; ++i){
+            if(posMoves[i] == 1){
+                drawField(i, Qt::blue);
+                drawPiece(i);
+            }
+            if(posMoves[i] == 2){
+                drawField(i, Qt::red);
+                drawPiece(i);
+            }
         }
-        if(posMoves[i] == 2){
-            drawField(i, Qt::red);
-            drawPiece(i);
+    } else
+    if(myBoard->getChosenPiece() != nullptr){
+        if(myBoard->getChosenPiece()->checkPossibleMove(field) == 2){
+            myBoard->deletePiece(activePiece);
         }
+        myBoard->getChosenPiece()->setMyField(myBoard->getField(field));
+        myBoard->setChosenPiece(false, nullptr);
+        drawBoard();
     }
 
-    std::cout << "\n My position: " << field << "\n";
-    for(int i=7; i>=0; --i){
-        for(int j=0; j<8; ++j){
-            std::cout << posMoves[i*8 + j] << " ";
-        }
-        std::cout << "\n";
-    }
 }

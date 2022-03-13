@@ -13,5 +13,4 @@ void King::possiableMoves(Chessboard *board){
     setPosMovesFalse();
     hvCheck(board);
     diaCheck(board);
-    return;
 }

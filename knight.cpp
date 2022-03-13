@@ -38,5 +38,4 @@ void Knight::possiableMoves(Chessboard *board){
         if(myVert >=1){ nextField = myField->getNumber() + 15; changePosMove(board, nextField); }
         if(myVert <=6){  nextField = myField->getNumber() + 17;  changePosMove(board, nextField); }
     }
-    return;
 }
