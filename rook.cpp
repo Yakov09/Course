@@ -6,8 +6,11 @@ Rook::Rook(Chessfield *myF, bool myC)
     color = myC;
     whiteImageName = "rook_w.png";
     blackImageName = "rook_b.png";
+    range = 7;
 }
 
-int* Rook::possiableMoves(Chessboard *board){
-
+void Rook::possiableMoves(Chessboard *board){
+    setPosMovesFalse();
+    hvCheck(board);
+    return;
 }

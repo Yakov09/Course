@@ -76,6 +76,26 @@ void MyGraphicsView::mouseReleaseEvent(QMouseEvent *mouseEvent){
     drawBoard();
     drawField(field, Qt::yellow);
     drawPiece(field);
+    int posMoves[64];
+    myBoard->getPieceFromField(field)->possiableMoves(myBoard);
+    myBoard->getPieceFromField(field)->getPosMoves(posMoves);
 
+    for(int i=0; i<64; ++i){
+        if(posMoves[i] == 1){
+            drawField(i, Qt::blue);
+            drawPiece(i);
+        }
+        if(posMoves[i] == 2){
+            drawField(i, Qt::red);
+            drawPiece(i);
+        }
+    }
 
+    std::cout << "\n My position: " << field << "\n";
+    for(int i=7; i>=0; --i){
+        for(int j=0; j<8; ++j){
+            std::cout << posMoves[i*8 + j] << " ";
+        }
+        std::cout << "\n";
+    }
 }

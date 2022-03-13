@@ -2,6 +2,7 @@
 #define PIECE_H
 #include "chessfield.h"
 #include <string>
+#include <iostream>
 
 class Chessboard;
 class Piece
@@ -13,15 +14,19 @@ protected:
     bool color;                                                 // 0 - white, 1 - black
     Chessfield* myField;
     bool canJump = false;
-    bool posMoves[64];
-    bool moveMatrix[15][15];
+    int posMoves[64];                           // 0 - no move, 1 - can move, 2 - can take
+    int range;
+    void hvCheck(Chessboard* board);     // horizontal & vertical possible moves check
+    void diaCheck(Chessboard* board);    // diagonal possible moves check
 public:
     Piece();    
-    virtual int* possiableMoves(Chessboard* board) = 0;   // 0 - no move, 1 - can move, 2 - can take
+    virtual void possiableMoves(Chessboard* board) = 0;   // 0 - no move, 1 - can move, 2 - can take
+    void getPosMoves(int posM[64]);
     void setPosMovesFalse();
     Chessfield* getMyField();
     std::string getImagePath();
-
+    void printPosMoves();
+    bool getColor();
 };
 
 #endif // PIECE_H

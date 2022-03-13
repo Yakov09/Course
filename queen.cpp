@@ -6,8 +6,12 @@ Queen::Queen(Chessfield *myF, bool myC)
     color = myC;
     whiteImageName = "queen_w.png";
     blackImageName = "queen_b.png";
+    range = 7;
 }
 
-int* Queen::possiableMoves(Chessboard *board){
-
+void Queen::possiableMoves(Chessboard *board){
+    setPosMovesFalse();
+    hvCheck(board);
+    diaCheck(board);
+    return;
 }

@@ -6,8 +6,12 @@ King::King(Chessfield *myF, bool myC)
     color = myC;
     whiteImageName = "king_w.png";
     blackImageName = "king_b.png";
+    range = 1;
 }
 
-int* King::possiableMoves(Chessboard *board){
-
+void King::possiableMoves(Chessboard *board){
+    setPosMovesFalse();
+    hvCheck(board);
+    diaCheck(board);
+    return;
 }

@@ -7,7 +7,7 @@ class Bishop : public Piece
 {
 public:
     Bishop(Chessfield *myF, bool myC);
-    int* possiableMoves(Chessboard* board);
+    void possiableMoves(Chessboard* board);
 };
 
 #endif // BISHOP_H

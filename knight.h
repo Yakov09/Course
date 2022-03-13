@@ -5,9 +5,10 @@
 
 class Knight : public Piece
 {
+    void changePosMove(Chessboard* board, int nextField);
 public:
     Knight(Chessfield *myF, bool myC);
-    int* possiableMoves(Chessboard* board);
+    void possiableMoves(Chessboard* board);
 };
 
 #endif // KNIGHT_H

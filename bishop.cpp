@@ -6,8 +6,12 @@ Bishop::Bishop(Chessfield *myF, bool myC)
     color = myC;
     whiteImageName = "bishop_w.png";
     blackImageName = "bishop_b.png";
+    range = 7;
 }
 
-int* Bishop::possiableMoves(Chessboard *board){
-
+void Bishop::possiableMoves(Chessboard *board){
+    setPosMovesFalse();
+    diaCheck(board);
+    //printPosMoves();
+    return;
 }
