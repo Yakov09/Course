@@ -9,6 +9,6 @@ Knight::Knight(Chessfield *myF, bool myC)
     blackImageName = "knight_b.png";
 }
 
-bool* Knight::possiableMoves(Chessboard *board){
+int* Knight::possiableMoves(Chessboard *board){
 
 }

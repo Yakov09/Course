@@ -7,7 +7,7 @@ class Pawn : public Piece
 {
 public:
     Pawn(Chessfield *myF, bool myC);
-    bool* possiableMoves(Chessboard* board);
+    int* possiableMoves(Chessboard* board);
 };
 
 #endif // PAWN_H

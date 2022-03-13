@@ -1,6 +1,6 @@
 #ifndef CHESSFIELD_H
 #define CHESSFIELD_H
-
+#include <QGraphicsScene>
 
 class Chessfield
 {

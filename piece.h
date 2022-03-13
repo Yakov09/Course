@@ -17,10 +17,11 @@ protected:
     bool moveMatrix[15][15];
 public:
     Piece();    
-    virtual bool* possiableMoves(Chessboard* board) = 0;
+    virtual int* possiableMoves(Chessboard* board) = 0;   // 0 - no move, 1 - can move, 2 - can take
     void setPosMovesFalse();
     Chessfield* getMyField();
     std::string getImagePath();
+
 };
 
 #endif // PIECE_H

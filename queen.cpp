@@ -8,6 +8,6 @@ Queen::Queen(Chessfield *myF, bool myC)
     blackImageName = "queen_b.png";
 }
 
-bool* Queen::possiableMoves(Chessboard *board){
+int* Queen::possiableMoves(Chessboard *board){
 
 }
