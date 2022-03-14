@@ -7,6 +7,7 @@ Pawn::Pawn(Chessfield *myF, bool myC)
     color = myC;
     whiteImageName = "pawn_w.png";
     blackImageName = "pawn_b.png";
+    canTransform = true;
 }
 
 void Pawn::possiableMoves(Chessboard *board){

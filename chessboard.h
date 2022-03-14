@@ -14,20 +14,23 @@ class Chessboard
     static const int MAX_PIECES = 32;
     Chessfield *field[64];
     Piece *placedPieces[MAX_PIECES];
-    bool moveOrder; // 0 - white, 1 - black    
+    bool moveOrder = 0; // 0 - white, 1 - black
     bool BlackCK = true;
     bool BlackCQ = true;
     bool WhiteCK = true;
     bool WhiteCQ = true;
     bool PieceChosen = false;
-    Piece* activePiece = nullptr;
-public:
-    Chessboard();
-    int makeMove(Chessfield fieldNow, Chessfield fieldDest);  // 0 - Ok, 1 - no figure to move, 2 - incorrect move, 3 - other failes
+    Piece* chosenPiece = nullptr;
+    int whiteKingSlot;
+    int blackKingSlot;
+    int win = 0;
+public:    
+    Chessboard();    
+    void makeMove(int field);
     int setPiece(Piece** pieceSlot, Piece* piecePlaced, Chessfield fieldPlaced);  // 0 - Ok, 1 - field is not empty, 2 - other fails
     void deletePiece(int slot);
     void deletePiece(Piece* delPiece);
-
+    void transformPiece(Piece* transPiece);
     void clearBoard();
     void setInintPosition();
     Piece* getPieceFromField(int aimField);
@@ -44,6 +47,11 @@ public:
     bool isBlackCQ();   // CQ - castle queenside
     bool isWhiteCK();
     bool isWhiteCQ();
+    void checkCastle();
+    void lockBlackCastle();
+    void lockWhiteCastle();
+    int getWin();       // 0 - no win, 1 - white wins, 2 - black wins
+    void checkWin();
 };
 
 #endif // CHESSBOARD_H

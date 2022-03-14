@@ -23,7 +23,7 @@ private:
     void drawBoard();
 
 protected slots:
-    void mousePressEvent(QMouseEvent *mouseEvent);
+    //void mousePressEvent(QMouseEvent *mouseEvent);
     //void mouseMoveEvent(QMouseEvent *mouseEvent);
     void mouseReleaseEvent(QMouseEvent *mouseEvent);
 };

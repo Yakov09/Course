@@ -53,33 +53,34 @@ void MyGraphicsView::drawPiece(int fieldNum){
     }
 }
 
-void MyGraphicsView::mousePressEvent(QMouseEvent *mouseEvent){
-    QPoint point = mouseEvent->pos();
-    if((point.rx() < padding)||(point.rx() > padding + size * 8)||(point.ry() < padding)||(point.ry() > padding + size * 8)) return;
-    int field_h = (point.rx() - padding) / size;
-    int field_v = 7 - ((point.ry() - padding) / size);
-    int field = field_h + field_v*8;
-    std::cout << "\n -- Pressed field " << field << " --- ";
-}
+//void MyGraphicsView::mousePressEvent(QMouseEvent *mouseEvent){
+//    QPoint point = mouseEvent->pos();
+//    if((point.rx() < padding)||(point.rx() > padding + size * 8)||(point.ry() < padding)||(point.ry() > padding + size * 8)) return;
+//    int field_h = (point.rx() - padding) / size;
+//    int field_v = 7 - ((point.ry() - padding) / size);
+//    int field = field_h + field_v*8;
+//    //std::cout << "\n -- Pressed field " << field << " --- ";
+//}
 
 
 
 void MyGraphicsView::mouseReleaseEvent(QMouseEvent *mouseEvent){
+    if(myBoard->getWin() != 0) return;
     QPoint point = mouseEvent->pos();
     if((point.rx() < padding)||(point.rx() > padding + size * 8)||(point.ry() < padding)||(point.ry() > padding + size * 8)) return;
     int field_h = (point.rx() - padding) / size;
     int field_v = 7 - ((point.ry() - padding) / size);
-    int field = field_h + field_v*8;
-    std::cout << "\n -- Released field " << field << " --- ";
-    Piece* activePiece = myBoard->getPieceFromField(field);
+    int field = field_h + field_v*8;    
+    Piece* activePiece = myBoard->getPieceFromField(field);     // piece on field under mouse cursor
+    Piece* chosenPiece = myBoard->getChosenPiece();             // piece, which was chosen as active by previous mouse click
 
-
-    if((myBoard->getChosenPiece() != nullptr)&&(myBoard->getChosenPiece()->checkPossibleMove(field)) == 0) {
+    if((chosenPiece != nullptr)&&(chosenPiece->checkPossibleMove(field)) == 0) {  // cancel choice
         myBoard->setChosenPiece(false, nullptr);
         drawBoard();
         return;
     }
-    if(myBoard->getChosenPiece() == nullptr){
+    if(chosenPiece == nullptr){                               // choose active piece for move
+        if(myBoard->getMoveOrder() != activePiece->getColor()) return;
         myBoard->setChosenPiece(true, activePiece);
         drawBoard();
         drawField(field, Qt::yellow);
@@ -89,7 +90,7 @@ void MyGraphicsView::mouseReleaseEvent(QMouseEvent *mouseEvent){
         activePiece->getPosMoves(posMoves);
 
         for(int i=0; i<64; ++i){
-            if(posMoves[i] == 1){
+            if((posMoves[i] == 1)||(posMoves[i] == 3)){
                 drawField(i, Qt::blue);
                 drawPiece(i);
             }
@@ -98,14 +99,13 @@ void MyGraphicsView::mouseReleaseEvent(QMouseEvent *mouseEvent){
                 drawPiece(i);
             }
         }
-    } else
-    if(myBoard->getChosenPiece() != nullptr){
-        if(myBoard->getChosenPiece()->checkPossibleMove(field) == 2){
-            myBoard->deletePiece(activePiece);
-        }
-        myBoard->getChosenPiece()->setMyField(myBoard->getField(field));
-        myBoard->setChosenPiece(false, nullptr);
+    } else                                                                   // making move
+    if(chosenPiece != nullptr){
+        myBoard->makeMove(field);
         drawBoard();
+        myBoard->checkWin();
+        if(myBoard->getWin() == 1) std::cout << "\n  White wins!\n";
+        if(myBoard->getWin() == 2) std::cout << "\n  Black wins!\n";
     }
 
 }

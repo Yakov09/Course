@@ -134,3 +134,11 @@ void Piece::setMyField(Chessfield* field){
     if((field->getNumber() < 0)||(field->getNumber() > 63)) return;
     myField = field;
 }
+
+void Piece::setCanTransform(bool status){
+    canTransform = status;
+}
+
+bool Piece::getCanTrnsform(){
+    return canTransform;
+}
