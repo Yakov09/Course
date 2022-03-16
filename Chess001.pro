@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui testlib
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,7 +21,15 @@ SOURCES += \
     pawn.cpp \
     piece.cpp \
     queen.cpp \
-    rook.cpp
+    rook.cpp \
+    test_bishop.cpp \
+    test_chessboard.cpp \
+    test_king.cpp \
+    test_knight.cpp \
+    test_pawn.cpp \
+    test_queen.cpp \
+    test_rook.cpp \
+    testpositions.cpp
 
 HEADERS += \
     bishop.h \
@@ -35,7 +43,15 @@ HEADERS += \
     pawn.h \
     piece.h \
     queen.h \
-    rook.h
+    rook.h \
+    test_bishop.h \
+    test_chessboard.h \
+    test_king.h \
+    test_knight.h \
+    test_pawn.h \
+    test_queen.h \
+    test_rook.h \
+    testpositions.h
 
 FORMS += \
     mainwindow.ui
