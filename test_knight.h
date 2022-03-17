@@ -8,6 +8,7 @@
 class test_knight : public QObject
 {
     Q_OBJECT
+    Piece* testPiece = nullptr;
 public:
     explicit test_knight(QObject *parent = nullptr);
 

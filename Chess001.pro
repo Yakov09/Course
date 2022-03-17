@@ -28,8 +28,7 @@ SOURCES += \
     test_knight.cpp \
     test_pawn.cpp \
     test_queen.cpp \
-    test_rook.cpp \
-    testpositions.cpp
+    test_rook.cpp
 
 HEADERS += \
     bishop.h \
@@ -50,8 +49,7 @@ HEADERS += \
     test_knight.h \
     test_pawn.h \
     test_queen.h \
-    test_rook.h \
-    testpositions.h
+    test_rook.h
 
 FORMS += \
     mainwindow.ui

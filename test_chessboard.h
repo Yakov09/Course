@@ -7,14 +7,16 @@
 class test_chessboard : public QObject
 {
     Q_OBJECT
+    Chessboard* testChessboard = nullptr;
+
 public:
     explicit test_chessboard(QObject *parent = nullptr);
 
 signals:
 private slots:
+    void clearBoard();
     void setInintPosition();
-    void getPieceFromField();
-    void transformPiece();
+    void getPieceFromField();   
     void deletePiece();
 };
 

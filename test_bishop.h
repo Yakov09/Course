@@ -9,6 +9,7 @@
 class test_bishop : public QObject
 {
     Q_OBJECT
+    Piece* testPiece = nullptr;
 public:
     explicit test_bishop(QObject *parent = nullptr);
 

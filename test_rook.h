@@ -8,6 +8,7 @@
 class test_rook : public QObject
 {
     Q_OBJECT
+    Piece* testPiece = nullptr;
 public:
     explicit test_rook(QObject *parent = nullptr);
 

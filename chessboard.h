@@ -52,6 +52,11 @@ public:
     void lockWhiteCastle();
     int getWin();       // 0 - no win, 1 - white wins, 2 - black wins
     void checkWin();
+
+    // positions for tests
+    void setTestPos_1();
+    void setTestPos_2();
+
 };
 
 #endif // CHESSBOARD_H

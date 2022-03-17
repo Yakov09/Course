@@ -20,6 +20,7 @@ MyGraphicsView::MyGraphicsView(QWidget *parent)
     myBoard = new Chessboard;
 
     myBoard->setInintPosition();
+    //myBoard->setTestPos_1();
     drawBoard();
 }
 
@@ -66,6 +67,7 @@ void MyGraphicsView::drawPiece(int fieldNum){
 
 void MyGraphicsView::mouseReleaseEvent(QMouseEvent *mouseEvent){
     if(myBoard->getWin() != 0) return;
+
     QPoint point = mouseEvent->pos();
     if((point.rx() < padding)||(point.rx() > padding + size * 8)||(point.ry() < padding)||(point.ry() > padding + size * 8)) return;
     int field_h = (point.rx() - padding) / size;

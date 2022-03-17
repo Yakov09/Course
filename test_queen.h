@@ -8,6 +8,7 @@
 class test_queen : public QObject
 {
     Q_OBJECT
+    Piece* testPiece = nullptr;
 public:
     explicit test_queen(QObject *parent = nullptr);
 

@@ -8,6 +8,7 @@
 class test_pawn : public QObject
 {
     Q_OBJECT
+    Piece* testPiece = nullptr;
 public:
     explicit test_pawn(QObject *parent = nullptr);
 

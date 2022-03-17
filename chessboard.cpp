@@ -27,8 +27,7 @@ void Chessboard::clearBoard(){
     }
 }
 void Chessboard::setInintPosition(){
-    clearBoard();
-    ;
+    clearBoard();    
     placedPieces[0] = new Rook(field[0], 0);
     placedPieces[1] = new Knight(field[1], 0);
     placedPieces[2] = new Bishop(field[2], 0);
@@ -167,3 +166,48 @@ void Chessboard::checkWin(){
 int Chessboard::getWin(){
     return win;
 }
+
+
+void Chessboard::setTestPos_1(){
+    clearBoard();
+    placedPieces[0] = new Rook(field[0], 0);
+    placedPieces[1] = new Knight(field[1], 0);
+    placedPieces[2] = new Bishop(field[2], 0);
+    placedPieces[3] = new Queen(field[3], 0);
+    placedPieces[4] = new King(field[4], 0); whiteKingSlot = 4;
+    //placedPieces[5] = new Bishop(field[5], 0);
+    //placedPieces[6] = new Knight(field[6], 0);
+    placedPieces[7] = new Rook(field[7], 0);
+    //for(int i = 8;i<16;++i) placedPieces[i] = new Pawn(field[i], 0);
+    for(int i = 16;i<24;++i) placedPieces[i] = new Pawn(field[i+6], 1);
+    //placedPieces[24] = new Rook(field[56], 1);
+    placedPieces[25] = new Knight(field[57], 1);
+    placedPieces[26] = new Bishop(field[58], 1);
+    placedPieces[27] = new Queen(field[59], 1);
+    placedPieces[28] = new King(field[60], 1); blackKingSlot = 28;
+    //placedPieces[29] = new Bishop(field[61], 1);
+    //placedPieces[30] = new Knight(field[62], 1);
+    //placedPieces[31] = new Rook(field[63], 1);
+}
+void Chessboard::setTestPos_2(){
+    clearBoard();
+    //placedPieces[0] = new Rook(field[0], 0);
+    //placedPieces[1] = new Knight(field[1], 0);
+    //placedPieces[2] = new Bishop(field[2], 0);
+    placedPieces[3] = new Queen(field[23], 0);
+    placedPieces[4] = new King(field[4], 0); whiteKingSlot = 4;
+    placedPieces[5] = new Bishop(field[25], 0);
+    placedPieces[6] = new Knight(field[26], 0);
+    placedPieces[7] = new Rook(field[27], 0);
+    for(int i = 8;i<16;++i) placedPieces[i] = new Pawn(field[i], 0);
+    for(int i = 16;i<24;++i) placedPieces[i] = new Pawn(field[i+32], 1);
+    //placedPieces[24] = new Rook(field[56], 1);
+    //placedPieces[25] = new Knight(field[57], 1);
+    //placedPieces[26] = new Bishop(field[58], 1);
+    placedPieces[27] = new Queen(field[39], 1);
+    placedPieces[28] = new King(field[60], 1); blackKingSlot = 28;
+    placedPieces[29] = new Bishop(field[31], 1);
+    placedPieces[30] = new Knight(field[32], 1);
+    placedPieces[31] = new Rook(field[33], 1);
+}
+
