@@ -10,3 +10,11 @@ Piece::Piece()
 void Piece::setPosMovesFalse(){
     for(int i=0; i<64; ++i) posMoves[i] = false;
 }
+
+Chessfield* Piece::getMyField(){
+    return myField;
+}
+std::string Piece::getImagePath(){
+    std::string actualImage = (color == 0) ? whiteImageName : blackImageName;
+    return path + "/" + actualImage;
+}

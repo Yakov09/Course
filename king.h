@@ -8,7 +8,7 @@ class King : public Piece
     bool movedAlready = false;
     bool checked = false;
 public:
-    King();
+    King(Chessfield *myF, bool myC);
     void setMovedAlready(bool moved);
     bool getMovedAlready();    
     bool* possiableMoves(Chessboard* board);

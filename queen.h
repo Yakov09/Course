@@ -6,7 +6,7 @@
 class Queen : public Piece
 {
 public:
-    Queen();    
+    Queen(Chessfield *myF, bool myC);
     bool* possiableMoves(Chessboard* board);
 };
 

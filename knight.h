@@ -6,7 +6,7 @@
 class Knight : public Piece
 {
 public:
-    Knight();    
+    Knight(Chessfield *myF, bool myC);
     bool* possiableMoves(Chessboard* board);
 };
 

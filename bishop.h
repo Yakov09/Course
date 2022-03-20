@@ -6,7 +6,7 @@
 class Bishop : public Piece
 {
 public:
-    Bishop();    
+    Bishop(Chessfield *myF, bool myC);
     bool* possiableMoves(Chessboard* board);
 };
 
