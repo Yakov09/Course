@@ -5,12 +5,12 @@
 
 class Rook : public Piece
 {
-    bool movedAlready;
+    bool movedAlready = false;
 public:
     Rook();
     void setMovedAlready(bool moved);
-    bool getMovedAlready();
-    bool isMovePossiable(Chessfield *destPosition, bool takes);
+    bool getMovedAlready();    
+    bool* possiableMoves(Chessboard* board);
 };
 
 #endif // ROOK_H

@@ -6,8 +6,8 @@
 class Bishop : public Piece
 {
 public:
-    Bishop();
-    bool isMovePossiable(Chessfield *destPosition, bool takes);
+    Bishop();    
+    bool* possiableMoves(Chessboard* board);
 };
 
 #endif // BISHOP_H

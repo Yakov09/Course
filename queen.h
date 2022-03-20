@@ -6,8 +6,8 @@
 class Queen : public Piece
 {
 public:
-    Queen();
-    bool isMovePossiable(Chessfield *destPosition, bool takes);
+    Queen();    
+    bool* possiableMoves(Chessboard* board);
 };
 
 #endif // QUEEN_H

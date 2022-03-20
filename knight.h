@@ -6,8 +6,8 @@
 class Knight : public Piece
 {
 public:
-    Knight();
-    bool isMovePossiable(Chessfield *destPosition, bool takes);
+    Knight();    
+    bool* possiableMoves(Chessboard* board);
 };
 
 #endif // KNIGHT_H

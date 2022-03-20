@@ -14,7 +14,8 @@ public:
 private:
     QGraphicsScene *scene;
     QGraphicsItemGroup *group_1;
-
+    void drawField(int size, int left, int top, int color, QGraphicsScene* boardScene);
+    void drawBoard(QGraphicsScene* boardScene, int size, int padding);
 };
 
 #endif // MYGRAPHICSVIEW_H

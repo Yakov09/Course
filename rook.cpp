@@ -4,3 +4,7 @@ Rook::Rook()
 {
 
 }
+
+bool* Rook::possiableMoves(Chessboard *board){
+
+}

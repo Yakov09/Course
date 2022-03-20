@@ -4,3 +4,7 @@ Bishop::Bishop()
 {
 
 }
+
+bool* Bishop::possiableMoves(Chessboard *board){
+
+}

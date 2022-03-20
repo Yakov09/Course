@@ -4,3 +4,7 @@ King::King()
 {
 
 }
+
+bool* King::possiableMoves(Chessboard *board){
+
+}
