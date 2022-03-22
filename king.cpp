@@ -8,6 +8,6 @@ King::King(Chessfield *myF, bool myC)
     blackImageName = "king_b.png";
 }
 
-bool* King::possiableMoves(Chessboard *board){
+int* King::possiableMoves(Chessboard *board){
 
 }

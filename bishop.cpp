@@ -8,6 +8,6 @@ Bishop::Bishop(Chessfield *myF, bool myC)
     blackImageName = "bishop_b.png";
 }
 
-bool* Bishop::possiableMoves(Chessboard *board){
+int* Bishop::possiableMoves(Chessboard *board){
 
 }

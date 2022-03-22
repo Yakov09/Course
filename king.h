@@ -11,7 +11,7 @@ public:
     King(Chessfield *myF, bool myC);
     void setMovedAlready(bool moved);
     bool getMovedAlready();    
-    bool* possiableMoves(Chessboard* board);
+    int* possiableMoves(Chessboard* board);
 };
 
 #endif // KING_H

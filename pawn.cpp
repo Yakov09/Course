@@ -8,6 +8,6 @@ Pawn::Pawn(Chessfield *myF, bool myC)
     blackImageName = "pawn_b.png";
 }
 
-bool* Pawn::possiableMoves(Chessboard *board){
+int* Pawn::possiableMoves(Chessboard *board){
 
 }

@@ -8,6 +8,6 @@ Rook::Rook(Chessfield *myF, bool myC)
     blackImageName = "rook_b.png";
 }
 
-bool* Rook::possiableMoves(Chessboard *board){
+int* Rook::possiableMoves(Chessboard *board){
 
 }

@@ -7,7 +7,7 @@ class Queen : public Piece
 {
 public:
     Queen(Chessfield *myF, bool myC);
-    bool* possiableMoves(Chessboard* board);
+    int* possiableMoves(Chessboard* board);
 };
 
 #endif // QUEEN_H

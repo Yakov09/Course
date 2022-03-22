@@ -4,7 +4,8 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsItemGroup>
-
+//#include <QGraphicsSceneMouseEvent>
+#include <QMouseEvent>
 #include "chessboard.h"
 
 class MyGraphicsView : public QGraphicsView
@@ -13,10 +14,20 @@ public:
     MyGraphicsView(QWidget *parent);
 
 private:
-    QGraphicsScene *scene;
-    QGraphicsItemGroup *group_1;
-    void drawField(int size, int left, int top, int color, QGraphicsScene* boardScene);
-    void drawBoard(QGraphicsScene* boardScene, int size, int padding, Chessboard* board);
+    Chessboard *myBoard = nullptr;
+    QGraphicsScene *scene = nullptr;
+    int size = 50;
+    int padding = 20;
+
+//    void drawField(int size, int left, int top, int color);
+    void drawField(int fieldNum, QBrush color);
+    void drawPiece(int fieldNum);
+    void drawBoard();
+
+protected slots:
+    void mousePressEvent(QMouseEvent *mouseEvent);
+    //void mouseMoveEvent(QMouseEvent *mouseEvent);
+    void mouseReleaseEvent(QMouseEvent *mouseEvent);
 };
 
 #endif // MYGRAPHICSVIEW_H

@@ -10,54 +10,72 @@ MyGraphicsView::MyGraphicsView(QWidget *parent)
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);    // Растягиваем содержимое по виджету
 
     /* Также зададим минимальные размеры виджета */
-    int size = 50;
-    int padding = 20;
+
     this->setMinimumHeight(size*8 + padding*2);
     this->setMinimumWidth(size*8 + padding*2);
 
     scene = new QGraphicsScene();   // Инициализируем сцену для отрисовки
     this->setScene(scene);          // Устанавливаем сцену в виджет
 
-
-    Chessboard *myBoard = new Chessboard;
+    myBoard = new Chessboard;
+//    QGraphicsPixmapItem *pm[64];
+//    for(int i=0; i<64; ++i) pm[i] = nullptr;
     myBoard->setInintPosition();
-    drawBoard(scene, size, padding, myBoard);
-   // char path[] = "/home/yakov/Chess001/images/king_w.png";
-   // QPixmap imageKing(path);
-    //QGraphicsPixmapItem *pm = scene->addPixmap(imageKing);
-
-    //int a=7, b=5;
-
-    //if(myBoard->getPieceFromField(0) != nullptr) a=3;
-    //pm->setPos(size*a + padding,size*b + padding);
+    drawBoard();
 }
 
-void MyGraphicsView::drawBoard(QGraphicsScene* boardScene, int size, int padding, Chessboard* board){
-
-    boardScene->setSceneRect(0, 0, size*8 + padding*2, size*8 + padding*2);
-    for(int i=0; i<8; ++i)
-        for(int j=0; j<8; ++j){
-            drawField(size, size*i + padding, size*j + padding, board->getFieldColor(i+j*8), boardScene);
-        }
-
-    for(int i=0; i<8; ++i)
-        for(int j=0; j<8; ++j){
-            Piece* tempPiece = board->getPieceFromField(i*8 + j);
-            if(tempPiece != nullptr){
-                std::cout << "\n --- " << tempPiece->getImagePath() << "---\n";
-                QString path = QString::fromStdString(tempPiece->getImagePath());
-                QPixmap pieceImage(path);
-                QGraphicsPixmapItem *pm = scene->addPixmap(pieceImage);
-                pm->setPos(size*(j) + padding, size*(7-i) + padding);
-            }
-        }
+void MyGraphicsView::drawBoard(){
+    scene->setSceneRect(0, 0, size*8 + padding*2, size*8 + padding*2);
+    for(int i=0; i<64; ++i){
+        QBrush color = (myBoard->getFieldColor(i) == 0) ?  Qt::gray : Qt::white;
+        drawField(i, color);
+        drawPiece(i);
+    }
 }
 
-void MyGraphicsView::drawField(int size, int left, int top, int color, QGraphicsScene* boardScene){
+void MyGraphicsView::drawField(int fieldNum, QBrush color){
     QPen penBlack(Qt::black);
-    QBrush brush(color == 0 ? Qt::white : Qt::gray);
+    int left = padding + (fieldNum % 8)*size;
+    int top = padding + (7 - fieldNum/8)*size;
     QRect fieldRect(left, top, size, size);
-    boardScene->addRect(fieldRect, penBlack, brush);
+    scene->addRect(fieldRect, penBlack, color);
+}
+
+void MyGraphicsView::drawPiece(int fieldNum){
+    Piece* tempPiece = myBoard->getPieceFromField(fieldNum);
+    QGraphicsPixmapItem *pm;
+    if(tempPiece != nullptr){
+        QString path = QString::fromStdString(tempPiece->getImagePath());
+        QPixmap pieceImage(path);
+        pm = scene->addPixmap(pieceImage);
+        int left = padding + (fieldNum % 8)*size;
+        int top = padding + (7 - fieldNum/8)*size;
+        pm->setPos(left, top);
+    }
+}
+
+void MyGraphicsView::mousePressEvent(QMouseEvent *mouseEvent){
+    QPoint point = mouseEvent->pos();
+    if((point.rx() < padding)||(point.rx() > padding + size * 8)||(point.ry() < padding)||(point.ry() > padding + size * 8)) return;
+    int field_h = (point.rx() - padding) / size;
+    int field_v = 7 - ((point.ry() - padding) / size);
+    int field = field_h + field_v*8;
+    std::cout << "\n -- Pressed field " << field << " --- ";
 }
 
 
+
+void MyGraphicsView::mouseReleaseEvent(QMouseEvent *mouseEvent){
+    QPoint point = mouseEvent->pos();
+    if((point.rx() < padding)||(point.rx() > padding + size * 8)||(point.ry() < padding)||(point.ry() > padding + size * 8)) return;
+    int field_h = (point.rx() - padding) / size;
+    int field_v = 7 - ((point.ry() - padding) / size);
+    int field = field_h + field_v*8;
+    std::cout << "\n -- Released field " << field << " --- ";
+    if(myBoard->getPieceFromField(field) == nullptr) return;
+    drawBoard();
+    drawField(field, Qt::yellow);
+    drawPiece(field);
+
+
+}

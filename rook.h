@@ -10,7 +10,7 @@ public:
     Rook(Chessfield *myF, bool myC);
     void setMovedAlready(bool moved);
     bool getMovedAlready();    
-    bool* possiableMoves(Chessboard* board);
+    int* possiableMoves(Chessboard* board);
 };
 
 #endif // ROOK_H
